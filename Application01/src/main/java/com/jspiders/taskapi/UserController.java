@@ -1,5 +1,7 @@
 package com.jspiders.taskapi;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,9 +34,43 @@ public class UserController {
 //    using @RequestBody
     @PostMapping
     public void createUser(@RequestBody UserSignupRequest userSignupRequest){
+
+//        AppUser user = new AppUser();
+//
+////        DATA
+//        user.setId(101l);
+//        user.setName("USer001");
+//        user.setMobile("90807656");
+//        user.setPassword("pass@123");
+
         System.out.println("This is createUser()");
         System.out.println(userSignupRequest.getName());
         System.out.println(userSignupRequest.getPhone());
         System.out.println(userSignupRequest.getPassword());
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addUser(@RequestBody UserSignupRequest userSignupRequest){
+
+        AppUser user = new AppUser();
+
+//        DATA
+        user.setId(101l);
+        user.setName("USer001");
+        user.setMobile("90807656");
+        user.setPassword("pass@123");
+
+        System.out.println("This is createUser()");
+        System.out.println(userSignupRequest.getName());
+        System.out.println(userSignupRequest.getPhone());
+        System.out.println(userSignupRequest.getPassword());
+
+        ResponseEntity<String> response = ResponseEntity
+                .status(HttpStatus.CREATED)
+                .header("Additional Data", "Chrome")
+                .body("User Created");
+
+        return response;
+    }
+
 }
